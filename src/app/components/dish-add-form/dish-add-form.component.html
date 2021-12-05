@@ -1,0 +1,65 @@
+<ng-template #content let-modal>
+   <div class="modal-header">
+     <h4 class="modal-title" id="modal-basic-title">Dodaj danie</h4>
+     <button
+       type="button"
+       class="close"
+       aria-label="Close"
+       (click)="modal.dismiss()"
+     >
+       <span>&times;</span>
+     </button>
+   </div>
+
+   <form class="container" [formGroup]="form" (ngSubmit)="submit()">
+   <div class="modal-body">
+         <div class="form-group">
+           <label for="name">Nazwa dania</label>
+           <input type="text" class="form-control" id="name" formControlName="name">
+           <small *ngIf="form.controls.name.invalid && form.controls.name.touched" 
+               class="form-text text-danger">
+               Podaj nazwę dania (min 4 znaki)</small>
+         </div>
+      
+         <div class="form-group">
+            <label for="price">Cena</label>
+            <input type="text" class="form-control" id="price" formControlName="price">
+            <small *ngIf="form.controls.price.invalid && form.controls.price.touched" 
+               class="form-text text-danger">
+               Podaj cenę w poprawnym formacie np. $12.81</small>
+         </div>
+      
+         <div class="form-group">
+            <label for="cusine">Kuchnia</label>
+            <select class="form-control" id="cusine" formControlName="cusine">
+              <option *ngFor="let cusine of cusines" [ngValue]="cusine"> {{cusine}} </option>
+             </select>
+             <small *ngIf="form.controls.cusine.invalid && form.controls.cusine.touched" 
+               class="form-text text-danger">
+               Wybierz kuchnię</small>
+         </div>
+      
+         <div class="form-group">
+            <label for="categories">Kategorie</label>
+            <select multiple class="form-control" id="categories" formControlName="categories">
+              <option *ngFor="let cat of categories" [ngValue]="cat"> {{cat}} </option>
+            </select>
+            <small *ngIf="form.controls.categories.invalid && form.controls.categories.touched" 
+               class="form-text text-danger">
+               Wybierz przynajmniej jedną kategorię</small>
+          </div>
+   </div>
+   
+   <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" 
+      [disabled]="form.invalid"
+      (click)="modal.close()"
+      ngbAutofocus>
+      Submit</button>
+   </div>
+   </form>
+ </ng-template>
+
+ <div id="open-btn" (click)="open(content)">
+   Dodaj danie
+ </div>

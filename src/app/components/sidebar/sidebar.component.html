@@ -1,0 +1,26 @@
+<div class="d-flex flex-column justify-content-around align-items-center container">
+
+    <form class="form-inline my-2">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    <app-dropdown-multiselect
+        class="py-2"
+        name="kategorie"
+        [items]="categories"
+        (onSelectedChange)= "onCategoriesChange($event)">
+    </app-dropdown-multiselect>
+
+    <app-dropdown-multiselect
+        class="py-2"
+        name="kuchnie"
+        [items]="cusines"
+        (onSelectedChange)= "onCusinesChange($event)">
+    </app-dropdown-multiselect>
+
+    <h5>Ceny</h5>
+
+    <h5>Oceny</h5>
+
+<div>

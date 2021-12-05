@@ -1,0 +1,35 @@
+<div class="d-flex flex-column justify-content-around align-items-center mb-3">
+    <h4 type="button" class="mb-n1"
+        (click)="collapse.toggle()" 
+        [attr.aria-expanded]="!isCollapsed"
+        aria-controls="collapseExample">
+        <fa-icon [icon]="chevron_icon"></fa-icon>
+        {{ name }}
+    </h4>
+
+    <div *ngIf="isCollapsed" id="selected_list" class="d-inline-block text-truncate">
+        <small *ngFor="let item of selectedItems">
+            {{ item }} 
+        </small>
+    </div> 
+
+    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="mt-2">
+        <select multiple class="form-select" [size]="items.length" [(ngModel)]="selectedItems" (change)="selectedChange()">
+            <option *ngFor="let item of items" [ngValue]="item">                  
+                {{ item }}
+            </option>
+    </select>
+    </div>
+</div>
+
+<!--
+<div class="container" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+<div *ngFor="let item of items; let i=index" class="form-check">
+    <input class="form-check-input" type="checkbox" [id]="i" 
+        [checked]="selected[i]" (change)="select(i)">
+    <label class="form-check-label" [for]="i">
+        {{ item }} {{ i }}
+    </label>
+</div>
+</div>
+-->
