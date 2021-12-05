@@ -1,0 +1,16 @@
+div {
+    min-height: 45px;
+}
+
+.color-select-label {
+    width: 40px;
+    height: 40px;
+    margin: 5px 20px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.3);
+}
+
+.color-select-label:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: 0.2s;
+}

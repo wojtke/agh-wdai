@@ -1,0 +1,9 @@
+<div class="d-flex flex-row" *ngIf="colors != null">
+    <span *ngFor="let c of colors" 
+        class="color-select-label"
+        [ngStyle]="{'background-color': c}"
+        (click)="onColorSelected(c)"></span>
+</div>
+<div class="d-flex flex-row" *ngIf="colors == null">
+    <span>brak kolorów</span>
+</div>
