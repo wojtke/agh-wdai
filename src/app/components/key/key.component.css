@@ -1,0 +1,21 @@
+.btn {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    border: none;
+    
+    width: 60px;
+    height: 60px;
+
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: inherit;
+  }
+  .btn:focus {
+    outline: none;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }

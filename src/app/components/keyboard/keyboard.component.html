@@ -1,0 +1,20 @@
+<div class="flex-row">
+    <div class="number-grid">
+        <app-key *ngFor="let i of [1,2,3,4,5,6,7,8,9]" 
+            text={{i}}
+            color="DimGrey"
+            (click)="inputNumber(i.toString())"
+            ></app-key>
+    </div>  
+
+    <div class="function-grid">
+        <app-key text="ce" color="DarkRed" (click)="operation('ce')"></app-key>
+        <app-key text="c"  color="DarkRed" (click)="operation('c')"></app-key>
+        <app-key text="<" color="DarkRed" (click)="operation('<')"></app-key>
+        <app-key text="+" color="DarkSlateGray" (click)="operation('+')"></app-key>
+        <app-key text="-" color="DarkSlateGray" (click)="operation('-')"></app-key>
+        <app-key text="=" color="OrangeRed" (click)="operation('=')"></app-key>
+        <app-key text="*" color="DarkSlateGray" (click)="operation('*')"></app-key>
+        <app-key text="/" color="DarkSlateGray" (click)="operation('/')"></app-key>
+    </div>
+</div>

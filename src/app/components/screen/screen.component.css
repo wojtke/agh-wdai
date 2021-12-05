@@ -1,0 +1,25 @@
+.screen {
+    width: 100%;
+    height: 3.5rem;
+    background-color: rgb(38, 51, 51);
+    padding: 0.5rem 1rem;
+    margin-bottom: 1em;
+    overflow: hidden;
+
+    font-size: 1.7rem;
+    color: aliceblue;
+    position: relative;
+}
+
+.mainValue {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+
+    font-size: 1.9rem;
+}
+
+.upper {
+    text-align: left;
+    font-size: 0.9rem;
+}
