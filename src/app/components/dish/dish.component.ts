@@ -10,12 +10,11 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class DishComponent implements OnInit {
   @Input() dish!: Dish;
-  @Input() admin: boolean = false;
-  @Input() currency: string = 'USD';
   @Output() onDelete = new EventEmitter<Dish>();
+  
+  currencyPipe = CurrencyPipe;
 
   orders: number = 0;
-  currencyPipe = new CurrencyPipe();
 
   get availability(): string {
     let count = this.dish.max_orders - this.orders;
@@ -30,12 +29,12 @@ export class DishComponent implements OnInit {
 
   addOrder() {
     this.orders++;
-    this.cartService.addOrder();
+    this.cartService.addOrder(this.dish);
   }
 
   removeOrder() {
     this.orders--;
-    this.cartService.removeOrder();
+    this.cartService.removeOrder(this.dish);
   }
 
   del() {

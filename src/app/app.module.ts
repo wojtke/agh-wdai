@@ -16,6 +16,21 @@ import { DropdownMultiselectComponent } from './components/dropdown-multiselect/
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { DishListComponent } from './components/dish-list/dish-list.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { MenuComponent } from './view-templates/menu/menu.component';
+import { DishAddComponent } from './view-templates/dish-add/dish-add.component';
+import { WelcomeComponent } from './view-templates/welcome/welcome.component';
+import { OrderComponent } from './view-templates/order/order.component';
+import { NotFoundComponent } from './view-templates/not-found/not-found.component';
+import { LoginComponent } from './view-templates/auth/login/login.component';
+import { RegisterComponent } from './view-templates/auth/register/register.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
+import { PriceRangesliderComponent } from './components/price-rangeslider/price-rangeslider.component';
+import { DishDetailsComponent} from "./view-templates/dish-details/dish-details.component";
+import { CurrencyPickerComponent } from './components/currency-picker/currency-picker.component';
+import { DishReviewComponent } from './components/dish-review/dish-review.component';
 
 
 @NgModule({
@@ -28,6 +43,21 @@ import { FilterPipe } from './pipes/filter.pipe';
     DropdownMultiselectComponent,
     CurrencyPipe,
     FilterPipe,
+    DishListComponent,
+    OrderListComponent,
+    SearchbarComponent,
+    MenuComponent,
+    DishAddComponent,
+    WelcomeComponent,
+    OrderComponent,
+    NotFoundComponent,
+    LoginComponent,
+    RegisterComponent,
+    StarRatingComponent,
+    PriceRangesliderComponent,
+    DishDetailsComponent,
+    CurrencyPickerComponent,
+    DishReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +69,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     FontAwesomeModule,
     FormsModule
   ],
-  providers: [],
+  providers: [FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

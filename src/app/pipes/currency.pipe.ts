@@ -1,23 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { CurrencyService } from '../services/currency.service';
 
 @Pipe({
   name: 'currencyPipe'
 })
 export class CurrencyPipe implements PipeTransform {
-  USDtoEUR = 0.88;
+  constructor(private currencyService: CurrencyService) {}
+//FIXME fix the pipe
+  transform(price: string): string {
+    console.log(price);
+    let sign = price[0];
+    if (sign === this.currencyService.getCurrencySign()) {
+      return price;
+    } else {
 
-  transform(price: string, currency: string): string {
-    let symbol = price[0];
     let value = parseFloat(price.slice(1));
 
-    if (symbol == '$' && currency.toUpperCase() == 'EUR') {
-      return '€' + (value * this.USDtoEUR).toFixed(0) + '.99';
-    } else if (symbol == '€' && currency.toUpperCase() == 'USD') {
-      return '$' + (value / this.USDtoEUR).toFixed(0) + '.99';
-    } else {
-      return price;
+    let ratio = this.currencyService.getRatio(sign);
+
+    return this.currencyService.getCurrencySign() + (value*ratio).toFixed(2);
     }
-    
   }
 
 }

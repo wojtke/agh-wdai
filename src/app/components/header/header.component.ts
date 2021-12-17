@@ -1,6 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { Dish } from '../../Dish';
-import { CartService } from 'src/app/services/cart.service';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,20 +6,12 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() onAddDish = new EventEmitter;
-  @Output() onCurrencyChange = new EventEmitter;
 
-  addDish(dish: Dish) {
-    this.onAddDish.emit(dish);
-  }
-
-  changeCurrency(currency: string) {
-    this.onCurrencyChange.emit(currency);
-  }
-
-  constructor(public cartService: CartService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
 }
+
+//TODO login/logout/register

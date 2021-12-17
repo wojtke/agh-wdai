@@ -8,3 +8,5 @@ export interface Dish {
     max_orders: number;
     image_src: string;
 }
+
+//TODO make proper model

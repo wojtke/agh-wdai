@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Categories } from 'src/app/Categories';
 import { Cusines } from 'src/app/Cusines';
+import { SearchFilterService } from 'src/app/services/search-filter.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,18 +11,8 @@ import { Cusines } from 'src/app/Cusines';
 export class SidebarComponent implements OnInit {
   categories = Categories;
   cusines = Cusines;
-  @Output() categoriesChange = new EventEmitter<string[]>();
-  @Output() cusinesChange = new EventEmitter<string[]>();
 
-  onCategoriesChange(categories: string[]) {
-    this.categoriesChange.emit(categories);
-  }
-
-  onCusinesChange(cusines: string[]) {
-    this.cusinesChange.emit(cusines);
-  }
-
-  constructor() { }
+  constructor(public searchFilterService: SearchFilterService) { }
 
   ngOnInit(): void {
   }

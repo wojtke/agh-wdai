@@ -1,0 +1,12 @@
+<div class="container d-flex justify-content-center mt-200" >
+  <div *ngIf="editable" class="d-flex flex-row" (mouseleave)='clearHover()'>
+    <div *ngFor="let i of [1,2,3,4,5]" class="star" (mouseenter)="hover(i)" (click)="save(i)">
+      <fa-icon [ngClass]="getClass(i)" [icon]="getIcon(i)"></fa-icon>
+    </div>
+  </div>
+  <div *ngIf="!editable" class="d-flex flex-row">
+    <div *ngFor="let i of [1,2,3,4,5]" class="star-static">
+      <fa-icon class="icon-normal" [icon]="getIcon(i)"></fa-icon>
+    </div>
+  </div>
+</div>

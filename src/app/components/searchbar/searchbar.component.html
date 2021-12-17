@@ -1,0 +1,8 @@
+<div class="d-flex flex-row wrap">
+    <input class="form-control" type="search" placeholder="Search" 
+        aria-label="Search" [(ngModel)]="searchText" 
+        (change)="updateIfCleared()">
+    <button class="btn btn-outline-primary" (click)="search()">
+        Search
+    </button>
+</div>

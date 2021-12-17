@@ -1,0 +1,38 @@
+<main class="container card">
+  <div class="row">
+      <div class="col-12 col-md-7 col-lg-6">
+        <img class="card-img-top" src="{{ dish.image_src }}" alt="{{ dish.name }}">
+        <!--TODO use some photo swiper or sth-->
+      </div>
+
+      <div class="col-12 col-md-5 col-lg-6 card-body">
+        <div class="row card-title">
+          <h1 class="col-7">{{ dish.name }}</h1>
+          <h1 class="col-5">{{ dish.price }}</h1>
+        </div>
+
+        <h3 class="col-12">{{ dish.cusine }}</h3>
+        <h4 class="col-12 mb-0">Categories:</h4>
+        <div class="col-12 pl-4 mb-4" >
+          <span *ngFor="let cat of dish.categories">{{ cat }} </span>
+        </div>
+        <h4 class="col-12 mb-0">Ingredients:</h4>
+        <div class="col-12 pl-4 mb-4" >
+          <span *ngFor="let ing of dish.ingredients">{{ ing }} </span>
+        </div>
+      </div>
+
+      <div class="col-12 card-body">
+        Oceny
+      </div>
+
+  </div>
+
+
+
+  <app-star-rating [initialStars]="4" [editable]="false"></app-star-rating>
+</main>
+
+
+<!--TODO add oceny-->
+<!--TODO add ocena form-->

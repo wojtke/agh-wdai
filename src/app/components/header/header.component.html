@@ -1,39 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Restauracja</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand" routerLink="/">Restauracja</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
+      <div class="dropdown-divider"></div>
 
-      <a class="nav-item nav-link" href="#">Menu</a>
+      <a class="nav-item nav-link" routerLink="menu">Menu</a>
 
-      <app-dish-add-form class="nav-item nav-link"
-        (onAddDish)="addDish($event)">
-      </app-dish-add-form>
+      <a class="nav-item nav-link" routerLink="menu/new">Dodaj danie</a>
 
-      <div class="nav-item nav-link">
-        <div class="custom-control custom-radio custom-control-inline">
-          <input checked type="radio" id="usd" name="r" class="custom-control-input" (click)="changeCurrency('usd')">
-          <label class="custom-control-label" for="usd">USD</label>
-        </div>
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="eur" name="r" class="custom-control-input" (click)="changeCurrency('eur')">
-          <label class="custom-control-label" for="eur">EUR</label>
-        </div>
-      </div>
+      <a class="nav-item nav-link" routerLink="order">Podsumowanie</a>
+    </div>
 
-      <div *ngIf="cartService.getOrderCount()>10"
-         class="float-right nav-item nav-link "
-        [ngStyle]="{'color': 'blue'}">
-        Zamówienia: {{ cartService.getOrderCount() }}
-      </div>
-      <div *ngIf="cartService.getOrderCount()<11"
-        class="float-right nav-item nav-link "
-       [ngStyle]="{'color': 'orange'}">
-       Zamówienia: {{ cartService.getOrderCount() }}
-     </div>
 
+    <div class="navbar-nav ml-auto">
+      <div class="dropdown-divider"></div>
+      <app-currency-picker class="nav-item nav-link">
+      </app-currency-picker>
+      <div class="dropdown-divider"></div>
+
+      <a class="nav-item nav-link" routerLink="login">Zaloguj</a>
+      <a class="nav-item nav-link" routerLink="register">Zarejestruj</a>
     </div>
   </div>
 </nav>

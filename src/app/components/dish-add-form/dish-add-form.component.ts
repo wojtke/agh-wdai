@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Dish } from '../../Dish';
 import { Categories } from 'src/app/Categories';
 import { Cusines } from 'src/app/Cusines';
+import { DishListService } from 'src/app/services/dish-list.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,13 +13,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./dish-add-form.component.css']
 })
 export class DishAddFormComponent implements OnInit {
-  @Output() onAddDish = new EventEmitter;
   form!: FormGroup;
 
   categories = Categories;
   cusines = Cusines;
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal) {}
+  constructor(
+    private formBuilder: FormBuilder, 
+    private modalService: NgbModal,
+    private dishListService: DishListService
+    ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -49,7 +53,10 @@ export class DishAddFormComponent implements OnInit {
  
   submit() {
     console.log(this.form.value);
-    this.onAddDish.emit(this.new_dish);
+    this.dishListService.addDish(this.new_dish);
     this.form.reset();
   }
 }
+
+
+//TODO move to view-templates

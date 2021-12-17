@@ -1,0 +1,7 @@
+<div class="row">
+    <app-dish class="col-12 col-md-6 col-lg-4" 
+        *ngFor="let dish of dishes" 
+        [dish]="dish"
+        (onDelete)="dishListService.deleteDish($event)">
+    </app-dish>
+</div>

@@ -1,24 +1,5 @@
-<app-header
-(onAddDish)="addDish($event)"
-(onCurrencyChange)="changeCurrency($event)"
-></app-header>
+<app-header></app-header>
 
-<main class="container p-n3">
-  <div class="row">
-    <app-sidebar class="col-12 col-sm-5 col-md-4"
-    (categoriesChange)= "changeCategories($event)"
-    (cusinesChange) = "changeCusines($event)"
-    ></app-sidebar>
+<router-outlet></router-outlet>
 
-    <section class="col container">
-      <div class="row">
-        <app-dish class="col-12 col-md-6 col-lg-4" 
-          *ngFor="let dish of (dish_list | filter:selectedCategories:selectedCusines)" 
-          [dish]="dish"
-          [currency]="currency"
-          (onDelete)="deleteDish($event)"
-        ></app-dish>
-      </div>
-    </section>
-  </div>
-</main>
+<div>footer</div>

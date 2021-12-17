@@ -1,0 +1,10 @@
+<div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input checked type="radio" id="usd" name="r" class="custom-control-input" (click)="currencyService.setCurrency('$')">
+    <label class="custom-control-label" for="usd">USD</label>
+  </div>
+  <div class="custom-control custom-radio custom-control-inline">
+    <input type="radio" id="eur" name="r" class="custom-control-input" (click)="currencyService.setCurrency('€')">
+    <label class="custom-control-label" for="eur">EUR</label>
+  </div>
+</div>
