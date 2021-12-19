@@ -1,2 +1,27 @@
-<p>order works!</p>
-<!--TODO make this an order summary view-->
+<main class="container card">
+  <div class="card-title h1 p-4">Produkty w koszyku:</div>
+  <div *ngIf="cartService.getOrderPairs().length>0" class="card-body">
+    <table class="table">
+      <tr>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Ilość</th>
+      </tr>
+      <tbody>
+      <tr *ngFor="let p of cartService.getOrderPairs()">
+        <td>{{ p.dish.name }}</td>
+        <td>{{ p.dish.price }}</td>
+        <td>{{ p.count }}</td>
+      </tr>
+      </tbody>
+      <tr>
+        <th scope="col">Razem</th>
+        <th scope="col">{{ cartService.getTotal() }}</th>
+        <th scope="col"></th>
+      </tr>
+    </table>
+  </div>
+  <div *ngIf="cartService.getOrderPairs().length==0" class="card-body">
+    <p class="h5">Koszyk jest pusty</p>
+  </div>
+</main>

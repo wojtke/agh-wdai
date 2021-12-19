@@ -1,0 +1,15 @@
+export const Categories = [
+    "main",
+    "salad",
+    "soup",
+    "dessert",
+    "drink",
+    "appetizer",
+    "sauce",
+    "vegan",
+    "vegetarian",
+    "meat",
+    "fish",
+    "seafood",
+    "hot",
+]

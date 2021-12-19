@@ -8,7 +8,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DishAddFormComponent } from './components/dish-add-form/dish-add-form.component';
 
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -17,7 +16,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CurrencyPipe } from './pipes/currency.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { DishListComponent } from './components/dish-list/dish-list.component';
-import { OrderListComponent } from './components/order-list/order-list.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { MenuComponent } from './view-templates/menu/menu.component';
 import { DishAddComponent } from './view-templates/dish-add/dish-add.component';
@@ -31,6 +29,12 @@ import { PriceRangesliderComponent } from './components/price-rangeslider/price-
 import { DishDetailsComponent} from "./view-templates/dish-details/dish-details.component";
 import { CurrencyPickerComponent } from './components/currency-picker/currency-picker.component';
 import { DishReviewComponent } from './components/dish-review/dish-review.component';
+import { DishReviewAddFormComponent } from './components/dish-review-add-form/dish-review-add-form.component';
+import { NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FooterComponent } from './components/footer/footer.component';
+import { PaginatePipe } from './pipes/paginate.pipe';
+import { PaginateNavComponent } from './components/paginate-nav/paginate-nav.component';
 
 
 @NgModule({
@@ -39,12 +43,10 @@ import { DishReviewComponent } from './components/dish-review/dish-review.compon
     DishComponent,
     HeaderComponent,
     SidebarComponent,
-    DishAddFormComponent,
     DropdownMultiselectComponent,
     CurrencyPipe,
     FilterPipe,
     DishListComponent,
-    OrderListComponent,
     SearchbarComponent,
     MenuComponent,
     DishAddComponent,
@@ -57,9 +59,14 @@ import { DishReviewComponent } from './components/dish-review/dish-review.compon
     PriceRangesliderComponent,
     DishDetailsComponent,
     CurrencyPickerComponent,
-    DishReviewComponent
+    DishReviewComponent,
+    DishReviewAddFormComponent,
+    FooterComponent,
+    PaginatePipe,
+    PaginateNavComponent,
   ],
   imports: [
+    NgMultiSelectDropDownModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -67,7 +74,8 @@ import { DishReviewComponent } from './components/dish-review/dish-review.compon
     MatSelectModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [FilterPipe],
   bootstrap: [AppComponent]

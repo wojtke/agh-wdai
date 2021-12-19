@@ -6,20 +6,21 @@ import { CurrencyService } from '../services/currency.service';
 })
 export class CurrencyPipe implements PipeTransform {
   constructor(private currencyService: CurrencyService) {}
-//FIXME fix the pipe
-  transform(price: string): string {
-    console.log(price);
-    let sign = price[0];
-    if (sign === this.currencyService.getCurrencySign()) {
+
+  transform(price: string, new_sign: string): string {
+
+    let old_sign = price[0];
+
+    let re = /^\d$/;
+    if(re.test(old_sign)) {
       return price;
-    } else {
+    }
 
     let value = parseFloat(price.slice(1));
 
-    let ratio = this.currencyService.getRatio(sign);
+    let ratio = this.currencyService.getRatio(old_sign);
 
-    return this.currencyService.getCurrencySign() + (value*ratio).toFixed(2);
+    return new_sign + (value*ratio).toFixed(2);
     }
-  }
 
 }

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Dish } from '../../Dish';
+import { Dish } from '../../models/Dish';
 import { DishListService } from 'src/app/services/dish-list.service';
+import { ReviewsService} from "../../services/reviews.service";
+import { Review } from "../../models/Review";
 
 @Component({
   selector: 'app-dish-details',
@@ -11,13 +13,21 @@ import { DishListService } from 'src/app/services/dish-list.service';
 })
 export class DishDetailsComponent implements OnInit {
   private routeSub!: Subscription;
-  constructor(private route: ActivatedRoute, private dishListService: DishListService) { }
+  constructor(private route: ActivatedRoute, private dishListService: DishListService, private reviewService: ReviewsService) { }
   dish!: Dish;
+  reviews!: Review[];
 
   ngOnInit() {
+    let id = '2';
     this.routeSub = this.route.params.subscribe(params => {
-      this.dish = this.dishListService.getDishById(params['id']);
+      id = params['id'];
     });
+
+    this.dishListService.getDishById(id).subscribe( res => {
+      console.log(res);
+    });
+
+    this.reviews = this.reviewService.getReviews(this.dish.id);
   }
 
   ngOnDestroy() {

@@ -12,11 +12,12 @@ export class CurrencyService {
     }
   }
 
-  getCurrencySign() {
+  get(): string {
     return this.currency;
   }
 
   getRatio(sign: string): number {
+    console.log(sign);
     if (sign==="$" && this.currency==="€") return 0.88;
     else if (sign==="€" && this.currency==="$") return 1.14;
     else return 1;

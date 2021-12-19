@@ -1,27 +1,35 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Dish } from 'src/app/Dish';
+import { Dish } from 'src/app/models/Dish';
 import { SearchFilterService } from '../services/search-filter.service';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
   constructor(private searchFilterService: SearchFilterService) {}
-//FIXME fix the pipe
-  transform(dishes: Dish[]): Dish[] {
-        let priceRange = this.searchFilterService.getPriceRange()
-        dishes = dishes.filter(dish => priceRange[0] < parseFloat(dish.price.slice(1)) && priceRange[1] > parseFloat(dish.price.slice(1)));
 
-        dishes = dishes.filter(dish => true);
+  transform(dishes: Dish[], refresh: number): Dish[] {
+      
+      let priceRange = this.searchFilterService.getPriceRange()
+      dishes = dishes.filter(dish => priceRange[0] < parseFloat(dish.price.slice(1)) && priceRange[1] > parseFloat(dish.price.slice(1)));
+      
+      dishes = dishes.filter(dish => true);
 
-        let categories = this.searchFilterService.getCategories();
+      let categories = this.searchFilterService.getCategories();
+      if(categories.length>0){
         dishes = dishes.filter(dish => !dish.categories
-          .every(category => categories.indexOf(category) != -1));
-        
-        let cusines = this.searchFilterService.getCusines();
+          .every(category => categories.indexOf(category) === -1));
+      }
+      
+      let cusines = this.searchFilterService.getCusines();
+      if(cusines.length>0){
         dishes = dishes.filter(dish => cusines.indexOf(dish.cusine) != -1);
-        
-        return dishes;
+      }
+
+      let query = this.searchFilterService.getSearchQuery();
+      dishes = dishes.filter(dish => dish.name.search(query)!=-1);
+      
+      return dishes;
     }
 
 }

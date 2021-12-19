@@ -1,0 +1,10 @@
+<div class="d-flex flex-row justify-content-center align-items-center">
+    <div [ngClass]="getClass('left')" (click)="prev()">
+        <fa-icon [icon]="left" size="lg"></fa-icon>
+    </div>
+    <div class="page-numbers">{{ page }} / {{ pagecount }}</div>
+    <div [ngClass]="getClass('right')" (click)="next()">
+        <fa-icon [icon]="right" size="lg"></fa-icon>
+    </div>
+</div>
+

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SearchFilterService {
+  refresh_count = 0;
   search_query: string = "";
   
   categories_filter: string[] = [];
@@ -15,7 +16,7 @@ export class SearchFilterService {
 
   setSearchQuery(query: string) {
     this.search_query = query;
-    console.log(this.search_query);
+    this.refresh_count++;
   }
   getSearchQuery() {
     return this.search_query;
@@ -23,6 +24,7 @@ export class SearchFilterService {
 
   setCategories(categories: string[]) {
     this.categories_filter = categories;
+    this.refresh_count++;
   }
   getCategories() {
     return this.categories_filter;
@@ -30,6 +32,7 @@ export class SearchFilterService {
 
   setCusines(cusines: string[]) {
     this.cusines_filter = cusines;
+    this.refresh_count++;
   } 
   getCusines() {
     return this.cusines_filter;
@@ -38,6 +41,7 @@ export class SearchFilterService {
   setPriceRange(min:number, max:number) {
     this.price_max = max;
     this.price_min = min;
+    this.refresh_count++;
   }
   getPriceRange() {
     return [this.price_min, this.price_max]
@@ -45,10 +49,15 @@ export class SearchFilterService {
 
   setMinRating(rating: number) {
     this.rate_min = rating;
+    this.refresh_count++;
   }
   getMinRating() {
     return this.rate_min;
   }
 
+  refresh() {
+    return this.refresh_count;
+  }
+  
   constructor() { }
 }

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import { Dish } from '../../Dish';
+import { Dish } from '../../models/Dish';
 import { CurrencyPipe } from 'src/app/pipes/currency.pipe';
 import { CartService } from 'src/app/services/cart.service';
+import { CurrencyService } from 'src/app/services/currency.service';
 
 @Component({
   selector: 'app-dish',
@@ -11,7 +12,7 @@ import { CartService } from 'src/app/services/cart.service';
 export class DishComponent implements OnInit {
   @Input() dish!: Dish;
   @Output() onDelete = new EventEmitter<Dish>();
-  
+
   currencyPipe = CurrencyPipe;
 
   orders: number = 0;
@@ -41,7 +42,7 @@ export class DishComponent implements OnInit {
     this.onDelete.emit(this.dish);
   }
 
-  constructor(public cartService: CartService) { }
+  constructor(public cartService: CartService, public currencyService: CurrencyService) { }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,15 @@
+.page-numbers {
+    font-size: large;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.icon {
+    cursor: pointer;
+    padding: 4px;
+}
+
+.icon-disabled {
+    opacity: 0.5;
+    padding: 4px;
+}

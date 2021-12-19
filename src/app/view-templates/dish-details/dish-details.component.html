@@ -22,17 +22,17 @@
         </div>
       </div>
 
-      <div class="col-12 card-body">
-        Oceny
-      </div>
+  <div class="col-12 card-body">
+    <!--TODO collapse-->
+    <app-dish-review-add-form></app-dish-review-add-form>
+  </div>
+
+  <div class="col-12 card-body">
+    <app-dish-review *ngFor="let review of reviews" [review]="review" class="col-12 m-4"></app-dish-review>
+  </div>
 
   </div>
 
-
-
-  <app-star-rating [initialStars]="4" [editable]="false"></app-star-rating>
 </main>
 
 
-<!--TODO add oceny-->
-<!--TODO add ocena form-->

@@ -1,7 +1,20 @@
-<div class="row">
+<div *ngIf="dishes.length>0" class="row">
     <app-dish class="col-12 col-md-6 col-lg-4" 
-        *ngFor="let dish of dishes" 
+        *ngFor="let dish of (dishes | filter: searchFilterService.refresh() | paginate: page: paginateService.getPerPage())"
         [dish]="dish"
-        (onDelete)="dishListService.deleteDish($event)">
+        (onDelete)="del($event)">
     </app-dish>
+    <app-paginate-nav class="col-12"
+        [(page)]="page"
+        [pagecount]="pageCount()"></app-paginate-nav>
+</div>
+
+<div *ngIf="dishes.length==0 && loading" class="container text-center p-5">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+</div>
+
+<div *ngIf="dishes.length==0 && !loading" class="container text-center p-5">
+    <h1>Nic nie znaleziono :/</h1>
 </div>

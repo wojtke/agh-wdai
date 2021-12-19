@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Dish } from '../Dish';
-import { DISHES } from '../mock-dishes'
+import { Dish } from '../models/Dish';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DishListService {
-  dishes: Dish[] = DISHES;
-
+  dishes: Dish[] = [];
 
   getDishes() {
-    return this.dishes;
+    return this.http.get<Dish[]>('/api/menu');
   }
-  getDishById(id: number) {
-    return this.dishes[id];
+  getDishById(id: string) {
+    return this.http.get<Dish[]>('/api/menu/' + id);
   }
 
   addDish(dish: Dish) {
-    this.dishes.push(dish);
+    return this.http.post('/api/menu/new', dish);
   }
 
   deleteDish(dish: Dish){
-    this.dishes = this.dishes.filter(d => d.id !== dish.id);
+    return this.http.delete('/api/menu/' + dish._id);
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 }

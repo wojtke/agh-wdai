@@ -1,30 +1,37 @@
-<div class="d-flex flex-column justify-content-around align-items-center container">
+<div class="card">
+    <div class="card-body pb-0">
+        <app-searchbar
+            (onSearch)="searchFilterService.setSearchQuery($event)">
+        </app-searchbar>
+    </div>
 
-    <app-searchbar
-        class="py-2"
-        (onSearch)="searchFilterService.setSearchQuery($event)">
-    </app-searchbar>
+    <div class="card-body pl-4 pb-0">
+        <app-dropdown-multiselect
+            name="kategorie"
+            [items]="categories"
+            (onSelectedChange)= "searchFilterService.setCategories($event)">
+        </app-dropdown-multiselect>
 
-    <app-dropdown-multiselect
-        class="py-2"
-        name="kategorie"
-        [items]="categories"
-        (onSelectedChange)= "searchFilterService.setCategories($event)">
-    </app-dropdown-multiselect>
+        <app-dropdown-multiselect
+            name="kuchnie"
+            [items]="cusines"
+            (onSelectedChange)= "searchFilterService.setCusines($event)">
+        </app-dropdown-multiselect>
 
-    <app-dropdown-multiselect
-        class="py-2"
-        name="kuchnie"
-        [items]="cusines"
-        (onSelectedChange)= "searchFilterService.setCusines($event)">
-    </app-dropdown-multiselect>
+        <h5>Ceny</h5>
 
-    <h5>Ceny</h5>
-    //TODO ceny rangeslider
+        <h5>Oceny</h5>
+    </div>
 
-    <h5>Oceny</h5>
-    //TODO oceny filter
+    <div class="card-body pl-4">
+            <label>Wyników na stronie:&nbsp;</label>
+            <select class="form-select py-1" aria-label="Disabled select example" [(ngModel)]="paginate.per_page">
+                <option value=6>6</option>
+                <option value=12>12</option>
+                <option value=24>24</option>
+            </select>
+        </div>
+    </div>
 
-    //TODO sortowanie
 
 <div>
