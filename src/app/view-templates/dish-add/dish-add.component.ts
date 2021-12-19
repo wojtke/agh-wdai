@@ -37,9 +37,8 @@ export class DishAddComponent implements OnInit {
     });
   }
 
-  get new_dish(): Dish {
+  get new_dish() {
     return {
-      id: 0,
       name: this.form.value.name,
       cusine: this.form.value.cusine,
       categories: this.form.value.categories,

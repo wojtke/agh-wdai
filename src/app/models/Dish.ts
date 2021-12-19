@@ -1,6 +1,5 @@
 export interface Dish {
-    _id?: string;
-    id: number;
+    _id: string;
     name: string;
     cusine: string;
     categories: string[];

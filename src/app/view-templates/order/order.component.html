@@ -20,6 +20,9 @@
         <th scope="col"></th>
       </tr>
     </table>
+
+    <button class="btn btn-primary m-2">Wyczyść koszyk</button>
+    <button class="btn btn-primary m-2">Złóż zamówienie</button>
   </div>
   <div *ngIf="cartService.getOrderPairs().length==0" class="card-body">
     <p class="h5">Koszyk jest pusty</p>

@@ -12,11 +12,11 @@ export class DishListService {
     return this.http.get<Dish[]>('/api/menu');
   }
   getDishById(id: string) {
-    return this.http.get<Dish[]>('/api/menu/' + id);
+    return this.http.get<Dish>('/api/menu/' + id);
   }
 
-  addDish(dish: Dish) {
-    return this.http.post('/api/menu/new', dish);
+  addDish(data: any) {
+    return this.http.post('/api/menu/new', data);
   }
 
   deleteDish(dish: Dish){

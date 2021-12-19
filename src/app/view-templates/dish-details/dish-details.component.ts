@@ -17,17 +17,20 @@ export class DishDetailsComponent implements OnInit {
   dish!: Dish;
   reviews!: Review[];
 
+  loading = true;
+
   ngOnInit() {
     let id = '2';
     this.routeSub = this.route.params.subscribe(params => {
       id = params['id'];
     });
 
-    this.dishListService.getDishById(id).subscribe( res => {
-      console.log(res);
+    this.dishListService.getDishById(id).subscribe( dish => {
+      this.dish = dish;
+      this.loading = false;
     });
 
-    this.reviews = this.reviewService.getReviews(this.dish.id);
+    this.reviews = this.reviewService.getReviews(this.dish._id);
   }
 
   ngOnDestroy() {

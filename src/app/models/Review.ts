@@ -1,6 +1,6 @@
 export interface Review {
   id: number;
-  dish_id: number;
+  dish_id: string;
 
   nick: string;
   title: string;

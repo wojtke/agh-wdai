@@ -1,10 +1,10 @@
-<div class="card my-3">
+<div class="card mb-4">
     <img *ngIf="dish.image_src!=''" class="card-img-top" src="{{ dish.image_src }}" alt="">
     <div class="card-body">
 
         <div class="d-flex justify-content-between">
-            <h5 class="card-title" >{{ dish.name }}</h5>
-            <h6 class="text-secondary float-right">{{ dish.price | currencyPipe:currencyService.get() }} </h6>
+            <div routerLink="menu/{{ dish._id }}" class="h5 card-title" >{{ dish.name }}</div>
+            <div class="h6 text-secondary float-right">{{ dish.price | currencyPipe:currencyService.get() }} </div>
         </div>
 
         <p class="card-text text-dark">

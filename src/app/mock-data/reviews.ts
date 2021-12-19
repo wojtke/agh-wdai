@@ -3,7 +3,7 @@ import { Review } from '../models/Review';
 export const reviews: Review[] = [
     {
         id: 1,
-        dish_id: 1,
+        dish_id: "1",
 
         nick: "jan 420",
         title: "Super",
@@ -14,7 +14,7 @@ export const reviews: Review[] = [
     },
     {
       id: 2,
-      dish_id: 1,
+      dish_id: "1",
 
       nick: "jan 420",
       title: "Super prawie",
@@ -25,7 +25,7 @@ export const reviews: Review[] = [
     },
     {
       id: 3,
-      dish_id: 2,
+      dish_id: "2",
 
       nick: "KrzyśXXXXXXX123",
       title: "Nie jadlane",
