@@ -35,6 +35,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FooterComponent } from './components/footer/footer.component';
 import { PaginatePipe } from './pipes/paginate.pipe';
 import { PaginateNavComponent } from './components/paginate-nav/paginate-nav.component';
+import { AdminPanelComponent } from './view-templates/admin-panel/admin-panel.component';
+import { ManageMenuComponent } from './view-templates/manage-menu/manage-menu.component';
+import { Dish2Component } from './components/dish2/dish2.component';
 
 
 @NgModule({
@@ -64,6 +67,9 @@ import { PaginateNavComponent } from './components/paginate-nav/paginate-nav.com
     FooterComponent,
     PaginatePipe,
     PaginateNavComponent,
+    AdminPanelComponent,
+    ManageMenuComponent,
+    Dish2Component,
   ],
   imports: [
     NgMultiSelectDropDownModule,

@@ -20,7 +20,7 @@ export class DishDetailsComponent implements OnInit {
   loading = true;
 
   ngOnInit() {
-    let id = '2';
+    let id = '';
     this.routeSub = this.route.params.subscribe(params => {
       id = params['id'];
     });

@@ -1,0 +1,11 @@
+picture {
+  object-fit: none;
+  object-position: center;
+  min-width: 200px;
+}
+
+.content > * {
+  flex: 1;
+}
+
+

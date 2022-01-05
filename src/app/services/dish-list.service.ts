@@ -23,5 +23,13 @@ export class DishListService {
     return this.http.delete('/api/menu/' + dish._id);
   }
 
+  getCategories() { //TODO
+    return this.http.delete('/api/categories');
+  }
+
+  getCusines() { //TODO
+    return this.http.delete('/api/cusines');
+  }
+
   constructor(private http: HttpClient) { }
 }

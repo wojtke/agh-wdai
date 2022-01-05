@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import { faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import { faStar as fasStar } from '@fortawesome/free-solid-svg-icons';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -18,6 +18,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class StarRatingComponent implements OnInit, ControlValueAccessor {
   @Input() initialStars: number = 2;
   @Input() editable: boolean = true;
+  @Input() size: number = 12;
 
   farStar = farStar;
   fasStar = fasStar;
@@ -44,7 +45,7 @@ export class StarRatingComponent implements OnInit, ControlValueAccessor {
     this.onTouched();
   }
 
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnInit(): void {
     this.starsNumber = this.initialStars;

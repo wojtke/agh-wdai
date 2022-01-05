@@ -1,0 +1,26 @@
+<div class="card d-flex flex-row flex-wrap content">
+
+  <picture class="d-flex flex-column justify-content-center">
+    <img *ngIf="dish.image_src!=''" class="card-img-top" src="{{ dish.image_src }}" alt="">
+    <img *ngIf="dish.image_src==''" class="card-img-top" src="https://source.unsplash.com/collection/251966/400x400" alt="">
+  </picture>
+
+  <div class="d-flex flex-column justify-content-between">
+    <div class="d-flex flex-column justify-content-start m-3">
+
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <div class="h4 mb-n1">{{dish.name}}</div>
+        <div class="text-secondary mb-n1">{{ dish.price | currencyPipe:currencyService.get() }}</div>
+      </div>
+
+      <app-star-rating class="py-1" [initialStars]="3" [editable]="false" [size]="20"></app-star-rating>
+
+    </div>
+
+    <div class="d-flex flex-row justify-content-between align-items-baseline m-3">
+      <button class="btn btn-primary px-2" (click)="addOrder()" [disabled]="left==0">Add to order</button>
+      <small class="text-secondary">{{ left }} left</small>
+    </div>
+
+  </div>
+</div>

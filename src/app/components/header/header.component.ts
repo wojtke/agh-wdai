@@ -1,4 +1,6 @@
 import { Component, OnInit} from '@angular/core';
+import { AccountService } from "../../services";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -7,11 +9,24 @@ import { Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
+    this.accountService.getUserDetails();
+  }
+
+  logout() {
+    this.accountService.logout()
+      .subscribe( res=>{
+        if (res==200) {
+          this.router.navigate(['/']);
+        } else {
+          console.log(res);
+        }
+      }, error=> {
+        console.log(error);
+      })
   }
 
 }
 
-//TODO login/logout/register

@@ -1,40 +1,42 @@
-// Import npm packages
+require('dotenv').config()
+
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const path = require('path');
+const cookieParser = require("cookie-parser");
 
 const app = express();
-const PORT = process.env.PORT || 8080; // Step 1
+const PORT = process.env.PORT || 8080;
 
-const routes = require('./api/routes');
+const routesMenu = require('./api/routes/menu');
+const routesUser =  require('./api/routes/users');
 
-const MDB_URI = "";
 
-// Step 2
-mongoose.connect(MDB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+//DB CONNECTION
+mongoose.connect(process.env.DB_CONNECTION_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!!!!');
+  console.log('Mongoose is connected!');
 });
 
 
-// Data parsing
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Step 3
-
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+  app.use(express.static('client/build'));
 }
 
-// HTTP request logger
+app.use(cookieParser());
+
+app.use('/api', routesMenu);
+app.use('/api', routesUser);
+
 app.use(morgan('tiny'));
-app.use('/api', routes);
+
 
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Dish = require('./models/dish');
+const Dish = require('../models/dish');
 
 router.get('/menu', (req, res) => {
 
@@ -14,9 +14,8 @@ router.get('/menu', (req, res) => {
 });
 
 router.get('/menu/:id', (req, res) => {
-    const id = req.params.id;
 
-    Dish.findById( id )
+    Dish.findById( req.params.id )
         .then((data) => {
             if(data==null) {
                 res.status(404).json({msg: "Not found"});
