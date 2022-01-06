@@ -1,0 +1,13 @@
+<div class="card container">
+  <div class="m-2 row">
+    <div class="col-3"> {{ user.name }}</div>
+    <div class="col-3"> {{ user.email }}</div>
+    <div class="col-3"> {{ user.role }}</div>
+
+    <div class="custom-control custom-switch col-3">
+      <input type="checkbox" class="custom-control-input" id="banSwitch-{{user.email}}" [(ngModel)]="banSwitch" (change)="banChange()">
+      <label class="custom-control-label" for="banSwitch-{{user.email}}"> {{ banned ? "Banned":"Not banned" }} </label>
+    </div>
+
+  </div>
+</div>

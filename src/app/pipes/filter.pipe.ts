@@ -9,10 +9,10 @@ export class FilterPipe implements PipeTransform {
   constructor(private searchFilterService: SearchFilterService) {}
 
   transform(dishes: Dish[], refresh: number): Dish[] {
-      
+
       let priceRange = this.searchFilterService.getPriceRange()
       dishes = dishes.filter(dish => priceRange[0] < parseFloat(dish.price.slice(1)) && priceRange[1] > parseFloat(dish.price.slice(1)));
-      
+
       dishes = dishes.filter(dish => true);
 
       let categories = this.searchFilterService.getCategories();
@@ -20,15 +20,15 @@ export class FilterPipe implements PipeTransform {
         dishes = dishes.filter(dish => !dish.categories
           .every(category => categories.indexOf(category) === -1));
       }
-      
-      let cusines = this.searchFilterService.getCusines();
-      if(cusines.length>0){
-        dishes = dishes.filter(dish => cusines.indexOf(dish.cusine) != -1);
+
+      let cuisines = this.searchFilterService.getCuisines();
+      if(cuisines.length>0){
+        dishes = dishes.filter(dish => cuisines.indexOf(dish.cuisine) != -1);
       }
 
       let query = this.searchFilterService.getSearchQuery();
       dishes = dishes.filter(dish => dish.name.search(query)!=-1);
-      
+
       return dishes;
     }
 

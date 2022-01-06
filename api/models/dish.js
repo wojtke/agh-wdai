@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const DishSchema = new Schema({
-    id: Number,
     name: String,
-    cusine: String,
+    desc: String,
+    cuisine: String,
     categories: [String],
     price: String,
     ingredients:[String],
     max_orders: Number,
-    image_src: String,
+    image_src: [String],
     date: {
         type: String,
         default: Date.now()

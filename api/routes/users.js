@@ -4,7 +4,8 @@ const User = require("../models/user");
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const authenticateToken = require('../auth')
-const Dish = require("../models/dish");
+const Cart = require("../models/cart");
+const {generateCart} = require("./cart");
 
 
 router.post('/users/register', async (req, res) => {
@@ -27,12 +28,26 @@ router.post('/users/register', async (req, res) => {
     res.status(500).json(error);
   }
 
-    await User.create(data, (error, obj) => {
-      if (error) {
-        res.status(500).json(error);
+  await User.create(data)
+    .then((user) => {
+
+      let cart = {
+        _id: user._id,
+        products: []
       }
-      res.status(201).json(obj);
+
+      Cart.create(cart)
+        .then((data) => {
+          res.status(200).json(data);
+        })
+        .catch((error) => {
+          res.status(500).json(error);
+        });
+    })
+    .catch((error) => {
+      res.status(500).json(error);
     });
+
 });
 
 router.post('/users/login', async (req, res) => {
@@ -86,9 +101,10 @@ router.get("/users/me", authenticateToken, async (req, res) => {
         res.status(400).json({msg: "User not found"});
       } else {
         res.status(200).json({
-          id: data._id, // ==req.user.id
+          _id: data._id, // ==req.user.id
           name: data.name,
-          email: data.email
+          email: data.email,
+          role: data.role
         });
       }
     })
@@ -109,5 +125,17 @@ router.get("/users/all", authenticateToken, async (req, res) => {
     });
 });
 
+router.get("/users/:id", authenticateToken, async (req, res) => {
+  await User.findById(req.params.id )
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500);
+    });
+});
+
 
 module.exports = router;
+

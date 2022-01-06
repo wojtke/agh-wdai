@@ -1,0 +1,21 @@
+<main class="container-lg">
+  <div class="row">
+    <app-sidebar class="col-12 col-md-4 col-lg-3">
+    </app-sidebar>
+
+    <div class="col d-flex flex-column">
+      <button type="button" class="btn btn-outline-dark mb-3" (click)="openModal(dishAddModal)">Add new dish</button>
+
+      <app-dish-list [manage]="true">
+      </app-dish-list>
+    </div>
+
+  </div>
+</main>
+
+<ng-template #dishAddModal let-modal>
+  <app-dish-add-modal
+    (close)="modal.close()"
+    (dismiss)="modal.dismiss()">
+  </app-dish-add-modal>
+</ng-template>

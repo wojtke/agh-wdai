@@ -1,0 +1,30 @@
+<main class="container card">
+  <div class="card-title h1 p-4">Products in cart:</div>
+  <div *ngIf="orders.length>0" class="card-body">
+    <table class="table">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Unit price</th>
+        <th scope="col">Quantity</th>
+      </tr>
+      <tbody>
+      <tr *ngFor="let o of orders">
+        <td>{{ o.name }}</td>
+        <td>{{ o.unit_price }}</td>
+        <td>{{ o.quantity }}</td>
+      </tr>
+      </tbody>
+      <tr>
+        <th scope="col">Total</th>
+        <th scope="col">{{ cartService.total }}</th>
+        <th scope="col"></th>
+      </tr>
+    </table>
+
+    <button class="btn btn-primary m-2" (click)="cartService.clearCart()">Clear the cart</button>
+    <button class="btn btn-primary m-2" (click)="cartService.finalize()">Order!</button>
+  </div>
+  <div *ngIf="orders.length==0" class="card-body">
+    <p class="h5">Carts is empty</p>
+  </div>
+</main>

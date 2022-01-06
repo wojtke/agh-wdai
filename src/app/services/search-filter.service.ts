@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 export class SearchFilterService {
   refresh_count = 0;
   search_query: string = "";
-  
+
   categories_filter: string[] = [];
-  cusines_filter: string[] = [];
+  cuisines_filter: string[] = [];
   price_min: number = 0;
   price_max: number = 100000;
 
@@ -30,12 +30,12 @@ export class SearchFilterService {
     return this.categories_filter;
   }
 
-  setCusines(cusines: string[]) {
-    this.cusines_filter = cusines;
+  setCuisines(cuisines: string[]) {
+    this.cuisines_filter = cuisines;
     this.refresh_count++;
-  } 
-  getCusines() {
-    return this.cusines_filter;
+  }
+  getCuisines() {
+    return this.cuisines_filter;
   }
 
   setPriceRange(min:number, max:number) {
@@ -58,6 +58,6 @@ export class SearchFilterService {
   refresh() {
     return this.refresh_count;
   }
-  
+
   constructor() { }
 }

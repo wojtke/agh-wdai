@@ -4,9 +4,12 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
   dish_id: String,
   user_id: String,
+
   title: String,
   body: String,
   rating: Number,
+
+  added_date: String,
 
   date: {
     type: String,

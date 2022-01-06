@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <div class="modal-title h3 mx-2" id="modal-basic-title" ngbAutofocus > {{ dish.name }} </div>
+  <button type="button" class="close" aria-label="Close" (click)="dismissModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <img class="card-img-top" src="{{ dish.image_src }}" alt="{{ dish.name }}">
+      <!--TODO use some photo swiper or sth-->
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="d-flex flex-row flex-nowrap justify-content-between align-items-center p-2">
+        <p class="blockquote p-2">
+          {{ dish.desc }}
+        </p>
+        <div class="h4 p-2"> {{ dish.price}}</div>
+      </div>
+
+      <div class="d-flex flex-row flex-nowrap justify-content-around p-2">
+        <div>
+          <div class="h5">Cuisine:</div>
+          <div class="h6 ml-2"> {{ dish.cuisine}} </div>
+        </div>
+        <div>
+          <div class="h5">Categories:</div>
+          <li class="ml-2" *ngFor="let cat of dish.categories">{{ cat }} </li>
+        </div>
+      </div>
+
+      <div class="p-2">
+        <div class="h5">Ingredients:</div>
+        <span class="ml-2">{{ dish.ingredients[0] }}</span>
+        <span *ngFor="let ing of dish.ingredients.slice(1)">, {{ ing }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="accountService.userHasAccess('user') && !accountService.banned"
+         class="col-12 card-body">
+      <app-dish-review-add-form [dish]="dish"></app-dish-review-add-form>
+    </div>
+
+    <div class="col-12 card-body">
+      <app-dish-review *ngFor="let review of reviews" [review]="review" class="col-12 m-4"></app-dish-review>
+    </div>
+
+  </div>
+</div>

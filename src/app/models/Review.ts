@@ -1,8 +1,8 @@
 export interface Review {
-  id: number;
+  _id: number;
   dish_id: string;
+  user_id: string;
 
-  nick: string;
   title: string;
   body: string;
   rating: number;

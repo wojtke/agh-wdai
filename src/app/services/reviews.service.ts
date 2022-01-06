@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import { reviews } from "../mock-data/reviews";
 import { Review } from "../models/Review";
+import {HttpClient} from "@angular/common/http";
+import {Dish} from "../models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewsService {
-  reviews = reviews;
 
-  getReviews(dish_id: string) {
-    return reviews.filter( (review) => review.dish_id==dish_id);
+  addReview(data: any) {
+    return this.http.post<Review>('/api/reviews', data);
   }
 
-  constructor() { }
+  getReviewsForDish(dish: Dish) {
+    return this.http.get<Review[]>('/api/reviews/dish/' + dish._id);
+  }
+
+  constructor(private http: HttpClient) { }
 }

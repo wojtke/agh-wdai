@@ -1,0 +1,58 @@
+<div [ngClass]="{'card d-flex flex-row content mb-3 mr-3': true, 'greyed': left==0}">
+
+  <picture class="d-flex flex-column justify-content-center" (click)="openModalBig(dishDetailsModal)">
+    <img *ngIf="dish.image_src.length>0" class="card-img-top" src="{{ dish.image_src[0] }}" alt="">
+    <img *ngIf="dish.image_src.length==0" class="card-img-top" src="https://source.unsplash.com/collection/251966/400x400" alt="">
+  </picture>
+
+  <div class="d-flex flex-column justify-content-between">
+    <div class="d-flex flex-column justify-content-start m-3">
+
+      <div class="h4">{{dish.name}}</div>
+      <div class="text-secondary ml-1 mb-n1">{{ dish.price | currencyPipe:currencyService.get() }}</div>
+      <app-star-rating [initialStars]="3" [editable]="false" [size]="15"></app-star-rating>
+
+    </div>
+
+    <div class="d-flex flex-row justify-content-between align-items-baseline mb-3 mx-3">
+      <button class="btn btn-primary px-2 nobreak" (click)="addOrder()"
+              [disabled]="left==0 || !accountService.userHasAccess('user')">Add to order</button>
+      <small class="text-secondary ml-1 nobreak">{{ left }} left</small>
+    </div>
+
+  </div>
+
+</div>
+
+
+<div *ngIf="manage" id="manage-buttons">
+  <button type="button" class="btn btn-sm btn-danger mr-2" (click)="openModal(delConfirmModal)">Delete</button>
+  <button type="button" class="btn btn-sm btn-warning" (click)="openModalBig(dishEditModal)">Edit</button>
+</div>
+
+<ng-template #dishDetailsModal let-modal>
+  <app-dish-details-modal
+    [dish]="dish"
+    (close)="modal.close()"
+    (dismiss)="modal.dismiss()">
+  </app-dish-details-modal>
+</ng-template>
+
+<ng-template #dishEditModal let-modal>
+  <app-dish-add-modal
+    [dishToEdit]="dish"
+    (close)="modal.close()"
+    (dismiss)="modal.dismiss()">
+  </app-dish-add-modal>
+</ng-template>
+
+<ng-template #delConfirmModal let-modal>
+  <app-yes-no-modal
+    [text]="'Are you sure you want to delete this dish?'"
+    (yes)="delete(); modal.close()"
+    (no)="modal.dismiss()">
+  </app-yes-no-modal>
+</ng-template>
+
+
+

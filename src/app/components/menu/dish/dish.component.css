@@ -1,0 +1,24 @@
+img {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+}
+
+.content > * {
+  flex: 1;
+  min-height: 200px;
+}
+
+.nobreak {
+  white-space: nowrap;
+}
+
+#manage-buttons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.greyed {
+  opacity: 0.5;
+}

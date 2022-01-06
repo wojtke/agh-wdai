@@ -35,6 +35,7 @@
     "mongoose": "^6.1.2",
     "morgan": "^1.10.0",
     "ng-multiselect-dropdown": "^0.3.7",
+    "nodemon": "^2.0.15",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -8,15 +8,20 @@ import {User} from "../models/User";
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class AccountService implements OnInit {
   user: User | null = null;
+  banned: boolean = false;
 
   constructor(
     private http: HttpClient
   ) {}
 
-  getUserDetails() {
-    this.http.get<User>('/api/users/me')
+  ngOnInit() {
+    this.refreshUserDetails();
+  }
+
+  async refreshUserDetails() {
+    await this.http.get<User>('/api/users/me')
       .subscribe(
         user => {
           this.user = user;
@@ -25,12 +30,24 @@ export class AccountService {
           console.log(error);
         },
       )
+
+    await this.http.get<any>('/api/bans/me')
+      .subscribe(
+        data => {
+          this.banned = data.banned;
+        },
+        error => {
+          console.log(error);
+        },
+      )
+
+    return this.user;
   }
 
   userHasAccess(role: string) {
     switch (role) {
       case 'admin':
-        return this.user!=null && this.user.role=='admin';
+        return this.user != null && this.user.role == 'admin';
       case 'manager':
         return this.user!=null && (this.user.role=='admin' || this.user.role=='manager');
       case 'user':
@@ -40,13 +57,13 @@ export class AccountService {
     }
   }
 
+
   register(user: User) {
     let res_value = new BehaviorSubject<Number>(0);
 
     this.http.post('/api/users/register', user)
       .subscribe(
         val => {
-
           res_value.next(200);
         },
         error => {
@@ -68,7 +85,7 @@ export class AccountService {
       .subscribe(
         val => {
           res_value.next(200);
-          this.getUserDetails();
+          this.refreshUserDetails();
         },
         error => {
           console.log(error);

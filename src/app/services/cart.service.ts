@@ -1,53 +1,112 @@
 import { Injectable } from '@angular/core';
-import { DishListService } from './dish-list.service';
+import { DishService } from './dish.service';
 import { Dish } from '../models/Dish'
 import { CurrencyService } from './currency.service';
+import {BehaviorSubject} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {OrderCart} from "../models/OrderCart";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  orders: Map<Dish, number> = new Map();
+  ordersSubject = new BehaviorSubject<OrderCart[]>([]);
 
-  addOrder(dish: Dish) {
-    let count = this.orders.get(dish) ?? 0
-    this.orders.set(dish, count+1)
+  get orders() {
+    return this.ordersSubject.asObservable();
   }
 
-  removeOrder(dish: Dish) {
-    let count = this.orders.get(dish) ?? 0
-    this.orders.set(dish, Math.max(count-1, 0))
+  get total() {
+    return '$123';
   }
 
-  getOrders() {
-    return this.orders;
+  refreshCart() {
+    let res_value = new BehaviorSubject<Number>(0);
+
+    this.http.get<any[]>('/api/cart')
+      .subscribe(
+        val => {
+          this.ordersSubject.next(val);
+          res_value.next(200);
+        },
+        error => {
+          console.log(error);
+          res_value.next(error.status);
+        });
+
+    return res_value.asObservable();
   }
 
-  getOrderPairs() {
-    let pairs: any[] = [];
-    this.orders.forEach( (count, dish) => {pairs.push({"dish":dish, "count":count})});
-    return pairs;
+  addToCart(dish: Dish) {
+    let res_value = new BehaviorSubject<Number>(0);
+
+    this.http.patch('/api/cart/add', { dish_id: dish._id})
+      .subscribe(
+        val => {
+          res_value.next(200);
+          this.refreshCart();
+        },
+        error => {
+          console.log(error);
+          res_value.next(error.status);
+        },
+      );
+    return res_value.asObservable();
   }
 
-  getOrderCount() {
-    let all_count = 0;
-    this.orders.forEach(count => all_count+=count);
-    return all_count;
+  removeFromCart(dish: Dish) {
+    let res_value = new BehaviorSubject<Number>(0);
+
+    this.http.patch('/api/cart/remove', { dish_id: dish._id})
+      .subscribe(
+        val => {
+          res_value.next(200);
+          this.refreshCart();
+        },
+        error => {
+          console.log(error);
+          res_value.next(error.status);
+        },
+      );
+    return res_value.asObservable();
   }
 
-  getTotal() {
-    let total = 0;
+  clearCart() {
+    let res_value = new BehaviorSubject<Number>(0);
 
-    this.orders.forEach( (count, dish) => {
-      let value = parseFloat(dish.price.slice(1));
-      let currency = dish.price[0];
-      let ratio = this.currencyService.getRatio(currency);
-
-      total += parseFloat(dish.price) * count * ratio;
-    });
-
-    return this.currencyService.get() + total;
+    this.http.patch('/api/cart/clear', {})
+      .subscribe(
+        val => {
+          res_value.next(200);
+          this.refreshCart();
+        },
+        error => {
+          console.log(error);
+          res_value.next(error.status);
+        },
+      );
+    return res_value.asObservable();
   }
 
-  constructor(public dishListService: DishListService, public currencyService: CurrencyService) { }
+  finalize() {
+    let res_value = new BehaviorSubject<Number>(0);
+
+    this.http.post('/api/history', {})
+      .subscribe(
+        val => {
+          res_value.next(200);
+          this.refreshCart();
+        },
+        error => {
+          console.log(error);
+          res_value.next(error.status);
+        },
+      );
+    return res_value.asObservable();
+  }
+
+
+  constructor(public dishService: DishService,
+              public currencyService: CurrencyService,
+              private http: HttpClient) { }
 }

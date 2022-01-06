@@ -1,0 +1,28 @@
+<div class="card container mb-2">
+  <div class="m-2 row">
+    <div class="col-3 h5 mb-n1"> Name </div>
+    <div class="col-3 h5 mb-n1"> Email </div>
+    <div class="col-3 h5 mb-n1"> Role </div>
+    <div class="col-3 h5 mb-n1"> Banned </div>
+  </div>
+</div>
+
+<div *ngIf="users.length>0" class="row no-gutters">
+  <app-admin-panel-user
+    class="col-12 mb-2"
+    *ngFor="let user of users"
+    [user]="user"
+    [banned]="bans.includes(user._id)"
+  >
+  </app-admin-panel-user>
+</div>
+
+<div *ngIf="users.length==0 && loading" class="container text-center p-5">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="users.length==0 && !loading" class="container text-center p-5">
+  <h1>Nothing found :/</h1>
+</div>

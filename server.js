@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 8080;
 
 const routesMenu = require('./api/routes/menu');
 const routesUser =  require('./api/routes/users');
+const routesCart = require('./api/routes/cart');
+const routesBan = require('./api/routes/bans');
+const routesHistory = require('./api/routes/history');
+const routesReview = require('./api/routes/reviews');
 
 
 //DB CONNECTION
@@ -34,6 +38,10 @@ app.use(cookieParser());
 
 app.use('/api', routesMenu);
 app.use('/api', routesUser);
+app.use('/api', routesCart);
+app.use('/api', routesBan);
+app.use('/api', routesHistory);
+app.use('/api', routesReview);
 
 app.use(morgan('tiny'));
 

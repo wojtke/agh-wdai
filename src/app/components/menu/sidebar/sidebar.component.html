@@ -1,0 +1,37 @@
+<div class="card mb-4">
+    <div class="card-body pb-0">
+        <app-searchbar
+            (onSearch)="searchFilterService.setSearchQuery($event)">
+        </app-searchbar>
+    </div>
+
+    <div class="card-body pl-4 pb-0">
+        <app-dropdown-multiselect
+            name="kategorie"
+            [items]="categories"
+            (onSelectedChange)= "searchFilterService.setCategories($event)">
+        </app-dropdown-multiselect>
+
+        <app-dropdown-multiselect
+            name="kuchnie"
+            [items]="cuisines"
+            (onSelectedChange)= "searchFilterService.setCuisines($event)">
+        </app-dropdown-multiselect>
+
+        <h5>Ceny</h5>
+
+        <h5>Oceny</h5>
+    </div>
+
+    <div class="card-body pl-4">
+            <label>Wyników na stronie:&nbsp;</label>
+            <select class="form-select py-1" aria-label="Disabled select example" [(ngModel)]="paginate.per_page">
+                <option value=6>6</option>
+                <option value=12>12</option>
+                <option value=24>24</option>
+            </select>
+        </div>
+    </div>
+
+
+<div>
