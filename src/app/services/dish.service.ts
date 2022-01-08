@@ -7,27 +7,9 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class DishService implements OnInit {
-  dishesSubject = new BehaviorSubject<Dish[]>([]);
 
-  get dishes() {
-    return this.dishesSubject.asObservable();
-  }
-
-  refreshDishes() {
-    let res_value = new BehaviorSubject<Number>(0);
-
-    this.http.get<Dish[]>('/api/menu')
-      .subscribe(
-        val => {
-          this.dishesSubject.next(val);
-          res_value.next(200);
-        },
-        error => {
-          console.log(error);
-          res_value.next(error.status);
-        },
-      )
-    return res_value.asObservable();
+  getDishes() {
+    return this.http.get<Dish[]>('/api/menu');
   }
 
   getDishById(id: string) {
@@ -54,6 +36,7 @@ export class DishService implements OnInit {
   updateDish(id: string, data: any) {
     let res_value = new BehaviorSubject<Number>(0);
 
+    delete data._id;
     this.http.patch('/api/menu/' + id, data)
       .subscribe(
         val => {
@@ -86,6 +69,5 @@ export class DishService implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.refreshDishes();
   }
 }

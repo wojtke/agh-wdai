@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {CurrencyService, CartService, DishService, AccountService} from "src/app/services";
+import {CurrencyService, CartService, DishService, AccountService, DishesTransform} from "src/app/services";
 import {Dish} from "src/app/models";
 import {CurrencyPipe} from "src/app/pipes";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -20,6 +20,7 @@ export class DishComponent implements OnInit {
 
   constructor(public cartService: CartService,
               public dishService: DishService,
+              public dishTransformService: DishesTransform,
               public currencyService: CurrencyService,
               public accountService: AccountService,
               private modalService: NgbModal) { }
@@ -40,7 +41,7 @@ export class DishComponent implements OnInit {
     this.dishService.deleteDish(this.dish._id)
       .subscribe(
         res => {
-          this.dishService.refreshDishes();
+          this.dishTransformService.refreshDishes();
         },
         err => {
           console.log(err);

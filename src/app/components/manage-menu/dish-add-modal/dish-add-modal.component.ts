@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DishService} from "src/app/services";
+import {DishesTransform, DishService} from "src/app/services";
 import {Categories} from "../../../mock-data/Categories";
 import {Cuisines} from "../../../mock-data/Cuisines";
 import {Ingredients} from "../../../mock-data/Ingredients";
@@ -18,12 +18,13 @@ export class DishAddModalComponent implements OnInit {
   form!: FormGroup;
   loading = false;
 
-  //TODO GET FROM API ENDPOint
+  //TODO get those from api endpoint
   categories = Categories;
   cuisines = Cuisines;
   ingredients = Ingredients;
 
   constructor(private formBuilder: FormBuilder,
+              private dishTransformService: DishesTransform,
               public dishListService: DishService) { }
 
   ngOnInit() {
@@ -51,13 +52,17 @@ export class DishAddModalComponent implements OnInit {
 
   }
 
-  get new_dish() {
+  get new_dish(): Dish {
     return {
+      _id: '',
       name: this.form.value.name,
       cuisine: this.form.value.cuisine,
       categories: this.form.value.categories,
       desc: this.form.value.desc,
-      price: this.form.value.price,
+      price: {
+        value: parseFloat(parseFloat(this.form.value.price.slice(1)).toFixed(2)),
+        currency: this.form.value.price[0]
+      },
       ingredients: this.form.value.ingredients,
       max_orders: this.form.value.max_orders,
       image_src: ['https://source.unsplash.com/collection/64437775/400x400', 'https://source.unsplash.com/collection/251966/400x400'],
@@ -83,7 +88,7 @@ export class DishAddModalComponent implements OnInit {
               this.loading = false;
               this.form.reset();
               this.closeModal();
-              this.dishListService.refreshDishes();
+              this.dishTransformService.refreshDishes();
             } else if (res !=0){
               this.loading = false;
               console.log("Something gone wrong addin", res)
@@ -103,7 +108,7 @@ export class DishAddModalComponent implements OnInit {
               this.loading = false;
               this.form.reset();
               this.closeModal();
-              this.dishListService.refreshDishes();
+              this.dishTransformService.refreshDishes();
             } else if (res !=0){
               this.loading = false;
               console.log("Something gone wrong updatin", res)

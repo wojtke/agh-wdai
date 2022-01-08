@@ -74,7 +74,7 @@ router.delete('/menu/:id', (req, res) => {
 });
 
 router.post('/menu', (req, res) => {
-
+    delete req.body._id;
     Dish.create(req.body)
       .then((data) => {
         res.status(200).json(data);

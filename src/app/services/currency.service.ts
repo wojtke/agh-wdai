@@ -23,5 +23,13 @@ export class CurrencyService {
     else return 1;
   }
 
+  compare( a: {value: number, currency: string}, b: {value: number, currency: string} | null): number {
+    if (b==null) return 0;
+    if (a.currency === b.currency) return a.value - b.value;
+    else return a.value * this.getRatio(a.currency) - b.value * this.getRatio(b.currency);
+  }
+
+
+
   constructor() { }
 }

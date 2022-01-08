@@ -17,11 +17,11 @@ export class CartService {
   }
 
   get total() {
-    return '$123';
+    return this.http.get<{ value: number, currency: string }>('/api/cart/total');
   }
 
-  refreshCart() {
-    let res_value = new BehaviorSubject<Number>(0);
+  async refreshCart() {
+    let res_value = new BehaviorSubject<number>(0);
 
     this.http.get<any[]>('/api/cart')
       .subscribe(
@@ -33,6 +33,7 @@ export class CartService {
           console.log(error);
           res_value.next(error.status);
         });
+
 
     return res_value.asObservable();
   }

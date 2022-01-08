@@ -4,6 +4,12 @@ img {
   height: 100%;
 }
 
+img:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  transition: 0.4s ease-in-out;
+}
+
 .content > * {
   flex: 1;
   min-height: 200px;

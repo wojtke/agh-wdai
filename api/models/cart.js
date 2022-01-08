@@ -7,7 +7,10 @@ const CartSchema = new Schema({
         dish_id: String,
         name: String,
         quantity: Number,
-        unit_price: String
+        unit_price: {
+            value: Number,
+            currency: String
+        },
     }],
     date: {
         type: String,

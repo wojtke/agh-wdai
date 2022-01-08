@@ -1,31 +1,44 @@
 <div class="card mb-4">
     <div class="card-body pb-0">
         <app-searchbar
-            (onSearch)="searchFilterService.setSearchQuery($event)">
+            (onSearch)="dishesTransformService.setSearchQuery($event)">
         </app-searchbar>
     </div>
 
     <div class="card-body pl-4 pb-0">
         <app-dropdown-multiselect
-            name="kategorie"
+            name="Categories"
             [items]="categories"
-            (onSelectedChange)= "searchFilterService.setCategories($event)">
+            (onSelectedChange)= "dishesTransformService.setCategories($event)">
         </app-dropdown-multiselect>
 
         <app-dropdown-multiselect
-            name="kuchnie"
+            name="Cuisines"
             [items]="cuisines"
-            (onSelectedChange)= "searchFilterService.setCuisines($event)">
+            (onSelectedChange)= "dishesTransformService.setCuisines($event)">
         </app-dropdown-multiselect>
 
-        <h5>Ceny</h5>
+        <div class="h6">Prices</div>
+        <div class="row">
+          <div class="col-6">
+            <label for="min">Min</label>
+            <input type="text" class="form-control" id="min"
+                   [(ngModel)]="minPrice" (change)="priceRangeChange()">
+          </div>
+          <div class="col-6">
+            <label for="max">Max</label>
+            <input type="text" class="form-control" id="max"
+                   [(ngModel)]="maxPrice" (change)="priceRangeChange()">
+          </div>
+        </div>
 
-        <h5>Oceny</h5>
     </div>
 
     <div class="card-body pl-4">
-            <label>Wyników na stronie:&nbsp;</label>
-            <select class="form-select py-1" aria-label="Disabled select example" [(ngModel)]="paginate.per_page">
+            <label>Positions per page:&nbsp;</label>
+            <select class="form-select py-1" aria-label="Disabled select example"
+                    [(ngModel)]="this.dishesTransformService.per_page"
+                    (change)="this.dishesTransformService.paginationRefresh()">
                 <option value=6>6</option>
                 <option value=12>12</option>
                 <option value=24>24</option>
@@ -33,5 +46,3 @@
         </div>
     </div>
 
-
-<div>

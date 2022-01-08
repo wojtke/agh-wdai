@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Dish, Review} from "src/app/models";
-import {AccountService, DishService, ReviewsService} from "src/app/services";
+import {AccountService, CurrencyService, DishService, ReviewsService} from "src/app/services";
 
 @Component({
   selector: 'app-dish-details-modal',
@@ -32,6 +32,9 @@ export class DishDetailsModalComponent implements OnInit {
   }
 
 
-  constructor(private dishListService: DishService, private reviewService: ReviewsService, public accountService: AccountService) {}
+  constructor(private dishListService: DishService,
+              private reviewService: ReviewsService,
+              public accountService: AccountService,
+              public currencyService: CurrencyService) {}
 
 }

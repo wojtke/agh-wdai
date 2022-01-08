@@ -6,7 +6,6 @@ import { Dish } from '../models/Dish';
 })
 export class PaginatePipe implements PipeTransform {
   transform(dishes: Dish[], page: number, per_page: number): Dish[] {
-    console.log(dishes);
     return dishes.slice((page - 1) * per_page, page * per_page);
   }
 

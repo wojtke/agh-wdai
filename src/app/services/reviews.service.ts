@@ -16,5 +16,9 @@ export class ReviewsService {
     return this.http.get<Review[]>('/api/reviews/dish/' + dish._id);
   }
 
+  getDishAvgRating(dish: Dish) {
+    return this.http.get<number>('/api/reviews/dish/' + dish._id + '/avg');
+  }
+
   constructor(private http: HttpClient) { }
 }

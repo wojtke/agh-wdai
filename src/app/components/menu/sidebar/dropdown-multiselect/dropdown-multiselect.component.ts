@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { faChevronRight, faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dropdown-multiselect',
@@ -8,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./dropdown-multiselect.component.css']
 })
 export class DropdownMultiselectComponent implements OnInit {
-  @Input() name: string = 'Wybierz';
+  @Input() name: string = 'Pick';
   @Input() items!: string[];
   @Input() disabled: boolean = false;
   @Output() onSelectedChange = new EventEmitter<string[]>();
@@ -25,11 +24,10 @@ export class DropdownMultiselectComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   get chevron_icon(): any {
     return this.isCollapsed ? faChevronRight : faChevronDown;
   }
 
 }
 
-//TODO fix or use the one kacper sent

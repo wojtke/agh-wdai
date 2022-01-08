@@ -1,12 +1,14 @@
 <div *ngIf="dishes.length>0" class="row no-gutters">
     <app-dish class="col-12 col-lg-6"
-        *ngFor="let dish of (dishes | filter: searchFilterService.refresh() | paginate: page: paginateService.getPerPage())"
+        *ngFor="let dish of dishes"
         [dish]="dish"
         [manage]="manage">
     </app-dish>
     <app-paginate-nav class="col-12"
-        [(page)]="page"
-        [pagecount]="pageCount()"></app-paginate-nav>
+        [(page)]="this.dishesTransformService.page"
+        [pagecount]="this.dishesTransformService.pagecount()"
+        (pageChange)="this.dishesTransformService.paginationRefresh()">
+    </app-paginate-nav>
 </div>
 
 <div *ngIf="dishes.length==0 && loading" class="container text-center p-5">

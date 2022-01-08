@@ -7,20 +7,11 @@ import { CurrencyService } from '../services/currency.service';
 export class CurrencyPipe implements PipeTransform {
   constructor(private currencyService: CurrencyService) {}
 
-  transform(price: string, new_sign: string): string {
+  transform(price: {value:number, currency:string}, new_currency: string): string {
 
-    let old_sign = price[0];
+    let ratio = this.currencyService.getRatio(price.currency);
 
-    let re = /^\d$/;
-    if(re.test(old_sign)) {
-      return price;
-    }
-
-    let value = parseFloat(price.slice(1));
-
-    let ratio = this.currencyService.getRatio(old_sign);
-
-    return new_sign + (value*ratio).toFixed(2);
+    return new_currency + (price.value*ratio).toFixed(2);
     }
 
 }

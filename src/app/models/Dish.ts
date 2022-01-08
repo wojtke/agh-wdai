@@ -4,7 +4,10 @@ export interface Dish {
     desc: string;
     cuisine: string;
     categories: string[];
-    price: string;
+    price: {
+        value: number;
+        currency: string;
+    };
     ingredients: string[];
     max_orders: number;
     image_src: string[];

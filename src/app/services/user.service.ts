@@ -39,6 +39,7 @@ export class UserService {
     return res_value.asObservable();
   }
 
+
   refreshBans() {
     let res_value = new BehaviorSubject<Number>(0);
 
@@ -84,6 +85,14 @@ export class UserService {
         },
       )
     return res_value.asObservable();
+  }
+
+  changeRole(user: User, role: string) {
+    return this.http.patch('/api/users/' + user._id, { role: role })
+  }
+
+  getRoles() {
+    return this.http.get<String[]>('/api/user/roles');
   }
 
   constructor(private http: HttpClient) { }

@@ -14,7 +14,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DropdownMultiselectComponent } from './components/menu/sidebar/dropdown-multiselect/dropdown-multiselect.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CurrencyPipe } from './pipes/currency.pipe';
-import { FilterPipe } from './pipes/filter.pipe';
 import { DishListComponent } from './components/menu/dish-list/dish-list.component';
 import { SearchbarComponent } from './components/menu/sidebar/searchbar/searchbar.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -31,14 +30,13 @@ import { DishReviewAddFormComponent } from './components/menu/dish-review-add-fo
 import { NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FooterComponent } from './components/layout/footer/footer.component';
-import { PaginatePipe } from './pipes/paginate.pipe';
 import { PaginateNavComponent } from './components/menu/paginate-nav/paginate-nav.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { ManageMenuComponent } from './components/manage-menu/manage-menu.component';
 import { DishDetailsModalComponent } from './components/menu/dish-details-modal/dish-details-modal.component';
 import { DishAddModalComponent } from './components/manage-menu/dish-add-modal/dish-add-modal.component';
 import { YesNoModalComponent } from './components/shared-ui/yes-no-modal/yes-no-modal.component';
-import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderHistoryComponent } from './components/order-summary/order-history/order-history.component';
 import { AdminPanelUserComponent } from './components/admin-panel/admin-panel-user/admin-panel-user.component';
 
 
@@ -50,7 +48,6 @@ import { AdminPanelUserComponent } from './components/admin-panel/admin-panel-us
     SidebarComponent,
     DropdownMultiselectComponent,
     CurrencyPipe,
-    FilterPipe,
     DishListComponent,
     SearchbarComponent,
     MenuComponent,
@@ -65,7 +62,6 @@ import { AdminPanelUserComponent } from './components/admin-panel/admin-panel-us
     DishReviewComponent,
     DishReviewAddFormComponent,
     FooterComponent,
-    PaginatePipe,
     PaginateNavComponent,
     AdminPanelComponent,
     ManageMenuComponent,
@@ -87,7 +83,6 @@ import { AdminPanelUserComponent } from './components/admin-panel/admin-panel-us
     FormsModule,
     HttpClientModule
   ],
-  providers: [FilterPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

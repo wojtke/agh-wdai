@@ -17,19 +17,23 @@ export class AccountService implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.refreshUserDetails();
   }
 
   async refreshUserDetails() {
+    this.user = JSON.parse(localStorage.getItem('user') ?? 'null');
+
     await this.http.get<User>('/api/users/me')
       .subscribe(
         user => {
           this.user = user;
+          localStorage.setItem('user', JSON.stringify(user));
         },
         error => {
           console.log(error);
+          this.user = null;
+          localStorage.removeItem('user');
         },
-      )
+      );
 
     await this.http.get<any>('/api/bans/me')
       .subscribe(
@@ -99,7 +103,7 @@ export class AccountService implements OnInit {
   logout(){
     let res_value = new BehaviorSubject<Number>(0);
 
-    this.http.get('/api/users/logout')
+    this.http.post('/api/users/logout', {})
       .subscribe(
         val => {
           this.user = null;

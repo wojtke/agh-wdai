@@ -1,5 +1,5 @@
 <main class="container card">
-  <div class="card-title h1 p-4">Products in cart:</div>
+  <div class="card-title h3 p-4">Products in cart:</div>
   <div *ngIf="orders.length>0" class="card-body">
     <table class="table">
       <tr>
@@ -10,21 +10,31 @@
       <tbody>
       <tr *ngFor="let o of orders">
         <td>{{ o.name }}</td>
-        <td>{{ o.unit_price }}</td>
+        <td>{{ o.unit_price | currencyPipe:currencyService.get() }}</td>
         <td>{{ o.quantity }}</td>
       </tr>
       </tbody>
       <tr>
         <th scope="col">Total</th>
-        <th scope="col">{{ cartService.total }}</th>
+        <th scope="col">{{ total | currencyPipe:currencyService.get() }}</th>
         <th scope="col"></th>
       </tr>
     </table>
 
-    <button class="btn btn-primary m-2" (click)="cartService.clearCart()">Clear the cart</button>
+    <button class="btn btn-primary m-2" (click)="openModal(delConfirmModal)">Clear the cart</button>
     <button class="btn btn-primary m-2" (click)="cartService.finalize()">Order!</button>
   </div>
   <div *ngIf="orders.length==0" class="card-body">
-    <p class="h5">Carts is empty</p>
+    <p class="h5">Cart is empty</p>
   </div>
 </main>
+
+<ng-template #delConfirmModal let-modal>
+  <app-yes-no-modal
+    [text]="'Are you sure you want to empty the cart?'"
+    (yes)="cartService.clearCart(); modal.close()"
+    (no)="modal.dismiss()">
+  </app-yes-no-modal>
+</ng-template>
+
+

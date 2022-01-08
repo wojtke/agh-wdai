@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categories } from 'src/app/mock-data/Categories';
 import { Cuisines } from 'src/app/mock-data/Cuisines';
-import { SearchFilterService, PaginateService} from 'src/app/services';
+import {CurrencyService, DishesTransform } from 'src/app/services';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,10 +9,21 @@ import { SearchFilterService, PaginateService} from 'src/app/services';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  minPrice?: number;
+  maxPrice?: number;
   categories = Categories;
   cuisines = Cuisines;
 
-  constructor(public searchFilterService: SearchFilterService, public paginate: PaginateService) { }
+  constructor(public dishesTransformService: DishesTransform,
+              private currencyService: CurrencyService) { }
+
+
+  priceRangeChange() {
+      this.dishesTransformService.setPriceRange(
+        this.minPrice ? { value:this.minPrice, currency:this.currencyService.get()} : null,
+        this.maxPrice ? { value:this.maxPrice, currency:this.currencyService.get()} : null
+      );
+  }
 
   ngOnInit(): void {
   }

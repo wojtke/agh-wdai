@@ -3,6 +3,7 @@ const router = express.Router();
 const Cart = require('../models/cart');
 const authenticateToken = require('../auth')
 const Dish = require("../models/dish");
+const cartController = require("../controllers/cart");
 
 router.get('/cart', authenticateToken, (req, res) => {
 
@@ -13,6 +14,17 @@ router.get('/cart', authenticateToken, (req, res) => {
         .catch((error) => {
             res.status(404).json(error);
         });
+});
+
+router.get('/cart/total', authenticateToken, (req, res) => {
+
+  Cart.findById( req.user.id )
+    .then((data) => {
+      res.status(200).json( cartController.getTotal(data) );
+    })
+    .catch((error) => {
+      res.status(404).json(error);
+    });
 });
 
 router.patch('/cart/add', authenticateToken, async (req, res) => {

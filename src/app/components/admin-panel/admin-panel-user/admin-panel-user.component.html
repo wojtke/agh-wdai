@@ -1,12 +1,22 @@
 <div class="card container">
-  <div class="m-2 row">
+  <div class="m-2 row align-items-center">
     <div class="col-3"> {{ user.name }}</div>
     <div class="col-3"> {{ user.email }}</div>
-    <div class="col-3"> {{ user.role }}</div>
 
-    <div class="custom-control custom-switch col-3">
-      <input type="checkbox" class="custom-control-input" id="banSwitch-{{user.email}}" [(ngModel)]="banSwitch" (change)="banChange()">
-      <label class="custom-control-label" for="banSwitch-{{user.email}}"> {{ banned ? "Banned":"Not banned" }} </label>
+    <div class="col-2">
+      <div class="d-flex flex-row align-items-center">
+        <select class="form-control form-control-sm" id="role" [(ngModel)]="user.role" (change)="roleChange()">
+          <option *ngFor="let role of roles" [ngValue]="role"> {{role}} </option>
+        </select>
+        <span *ngIf="roleChangeLoading" class="spinner-border spinner-border-sm ml-2"></span>
+      </div>
+    </div>
+
+    <div class="custom-control custom-switch col-3 offset-1">
+      <input type="checkbox" class="custom-control-input" id="banSwitch-{{user.email}}" [(ngModel)]="banned" (change)="banChange()">
+      <label class="custom-control-label" for="banSwitch-{{user.email}}">
+        {{ banned ? "Banned ":"Not banned " }} </label>
+      <span *ngIf="banChangeLoading" class="spinner-border spinner-border-sm ml-2"></span>
     </div>
 
   </div>

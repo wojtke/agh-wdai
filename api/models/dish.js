@@ -6,7 +6,10 @@ const DishSchema = new Schema({
     desc: String,
     cuisine: String,
     categories: [String],
-    price: String,
+    price: {
+      value: Number,
+      currency: String
+    },
     ingredients:[String],
     max_orders: Number,
     image_src: [String],

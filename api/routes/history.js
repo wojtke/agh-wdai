@@ -3,6 +3,8 @@ const router = express.Router();
 const OrderHist = require('../models/orderhist');
 const authenticateToken = require('../auth')
 const Cart = require("../models/cart");
+const cartController = require("../controllers/cart");
+
 
 router.get('/history/:id', authenticateToken, (req, res) => {
 
@@ -42,7 +44,7 @@ router.post('/history', authenticateToken, async (req, res) => {
     let order = new OrderHist({
       user_id: req.user.id,
       products: cart.products,
-      total_price: "123.45" //TODO: calculate total price
+      total_price: getTotal(cart)
     });
 
     order.save()
