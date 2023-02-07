@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "restauracja"
+  "defaultProject": "restauracja",
+  "cli": {
+    "analytics": false
+  }
 }

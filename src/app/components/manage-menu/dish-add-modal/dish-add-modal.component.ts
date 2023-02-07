@@ -65,7 +65,7 @@ export class DishAddModalComponent implements OnInit {
       },
       ingredients: this.form.value.ingredients,
       max_orders: this.form.value.max_orders,
-      image_src: ['https://source.unsplash.com/collection/64437775/400x400', 'https://source.unsplash.com/collection/251966/400x400'],
+      image_src: ['https://source.unsplash.com/collection/64437775/400x400?seed=' + Math.random()],
     };
   }
 

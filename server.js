@@ -30,10 +30,6 @@ mongoose.connection.on('connected', () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
-
 app.use(cookieParser());
 
 app.use('/api', routesMenu);
